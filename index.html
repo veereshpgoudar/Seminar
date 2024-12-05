@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veeresh's Seminar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(120deg, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            animation: slideInDown 1s ease-in-out;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0 20px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        header .btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Submitted By Styles */
+        #submitted {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #submitted span {
+            display: inline-block;
+            border-right: 2px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(30, end), blink 1s step-end infinite alternate;
+        }
+
+        /* Typewriter Animation for Guidance */
+        #guidance {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: white;
+            animation: typing 3s steps(30, end), blink 1s step-end infinite alternate;
+        }
+
+        /* Typing Animation */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 20ch;
+            }
+        }
+
+        @keyframes blink {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: white;
+            }
+        }
+
+        /* Slider Animation for Sections */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        /* Sliding Effects */
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Under Guidance Styles */
+        #guidance {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: white;
+        }
+
+        /* Section Styles */
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #about {
+            background: #f7f7f7;
+        }
+
+        #agenda {
+            background: #fff;
+            body: center;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            display: flex;
+            justify-content: center; /* Center events horizontally */
+            align-items: center; /* Center events vertically */
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .timeline .event {
+            background: #e3e3e3;
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer; /* Add cursor pointer to events */
+        }
+
+        .timeline .event:hover {
+            transform: rotateY(360deg) scale(1.1);
+            background: #0072ff;
+            color: white;
+        }
+
+        /* Media Section */
+        #media img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        #media img:hover {
+            transform: scale(1.1) rotate(-5deg);
+            filter: brightness(1.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            animation: fadeInUp 1s ease-in-out;
+            animation: blinking 1.5s infinite;
+        }
+
+        @keyframes blinking {
+            0%, 100% {
+                background-color: #333;
+            }
+            50% {
+                background-color: #555;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Popup Styles */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        #popup h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        #popup button {
+            margin-top: 10px;
+            background: #0072ff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        #popup button:hover {
+            background: #0056b3;
+        }
+
+        /* Blur Background */
+        .blur {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                color: black;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .timeline {
+                flex-direction: column;
+            }
+        }
+.blur-background {
+    filter: blur(5px);
+    pointer-events: none;
+}
+    
+    /* General video styles for responsiveness */
+
+/* General video styles for responsiveness */
+/* Style for the video container */
+.video-container {
+    width: 100%;  /* Set width to 100% of the parent container */
+    max-width: 100%;  /* Ensure it doesn't exceed the container width */
+    height: auto;  /* Let the height adjust automatically */
+    display: none;  /* Initially hide the video */
+}
+
+/* Show the video when the class 'show-video' is added */
+.show-video {
+    display: block;
+}
+
+/* Responsive design for mobile screens */
+@media (max-width: 767px) {
+    .video-container {
+        width: 100%;  /* Ensure video takes full width on smaller screens */
+        height: auto;  /* Keep height proportional */
+    }
+    
+    video {
+        width: 100%;  /* Set video width to 100% of its parent container */
+        height: auto;  /* Adjust height automatically based on the width */
+    }
+}
+
+/* Optional: Add some padding/margins for better spacing */
+.video-container {
+    padding: 10px;  /* Add padding around the video */
+    margin-top: 20px;  /* Optional: Space the video from other content */
+}
+
+/* For larger screens, ensure the video container takes a more appropriate width */
+@media (min-width: 768px) {
+    .video-container {
+        width: 80%;  /* Use 80% width on larger screens (adjust as needed) */
+        margin: 0 auto;  /* Center the video on the page */
+    }
+}
+    
+    
+    
+    /* Basic style for the h1 element */
+header h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  animation: slideBlurIn 3s ease-out;
+}
+
+@keyframes slideBlurIn {
+  0% {
+    transform: translateX(-100%);
+    filter: blur(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FREE SPACE MANAGEMENT</h1>
+        <p>Explore the journey of Free Space Management</p>
+        <a href="#about" class="btn">Learn More</a>
+        <div id="submitted">
+            SUBMITTED BY: <span>VEERESH P GOUDAR</span><br>
+            USN: <br><span>2GB24CS408</span><br>
+            UNDER THE GUIDANCE OF: <span>JYOTI Mam</span><br>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2>FREE SPACE MANAGEMENT</h2>
+        <p>Free space management uses techniques like bitmaps, linked lists, and grouping to track and allocate unused storage efficiently. It minimizes fragmentation and optimizes space with strategies like first-fit, best-fit, and worst-fit.
+
+</p>
+    </section>
+
+    <section id="agenda">
+        <h2>TOPICS</h2>
+        <div class="timeline">
+            <div class="event" id="introductionEvent">
+                <h3>Introduction</h3>
+                <p>(Definition & Techniques)</p>
+            </div>
+            <div class="event" id="mainSessionEvent">
+                <h3>Bit Vector</h3>
+                <p>(Definition & Principles)</p>
+            </div>
+            <div class="event" id="qaEvent">
+                <h3>Linked List</h3>
+                <p>(Definition & Structure)</p>
+            </div>
+            <div class="event" id="lili">
+                <h3>Grouping</h3>
+                <p>(Definition & Working)</p>
+            </div>
+            <div class="event" id="vee">
+                <h3>Counting</h3>
+                <p>(Definition & Working)</p>
+            </div>
+            <div class="event" id="vee1">
+                <h3>Space Maps</h3>
+                <p>(Definition & Working)</p>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+
+    <section id="media">
+        <h2>Gallery</h2>
+        <img src="one.jpg" alt="Seminar Preparation">
+        <img src="two.jpg" alt="Presentation Slide">
+    </section>
+    
+    
+    <section id="video-container">
+    <h2>Seminar Video</h2>
+    <video id="seminarVideo" controls>
+        <source src="seminar.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>-------------------------------------</p>
+        <p>Email: -------------------------------</p>
+        <p>Phone: ---------------------------------</p>
+    </section>
+
+    <div id="popup">
+        <h3></h3>
+        <p></p>
+        <br>
+        <h4></h4>
+        <h6></h6>
+        <button id="closePopup">Close</button>
+    </div>
+
+<script>
+    // Select the popup, close button, and elements to blur
+    const popup = document.getElementById("popup");
+    const closePopupButton = document.getElementById("closePopup");
+    const blurTargets = document.querySelectorAll("body > *:not(#popup)");
+    
+    // Function to open the popup with specific content
+    function openPopup(title, description, breakb, title1, description1) {
+        popup.querySelector("h3").textContent = title;
+        popup.querySelector("p").textContent = description;
+        popup.querySelector("br").textContent = breakb;
+        popup.querySelector("h4").textContent = title1;
+        popup.querySelector("h6").textContent = description1;
+        popup.style.display = "block";
+        blurTargets.forEach((el) => el.classList.add("blur")); // Apply blur effect
+    }
+
+    // Function to close the popup
+    closePopupButton.addEventListener("click", () => {
+        popup.style.display = "none";
+        blurTargets.forEach((el) => el.classList.remove("blur")); // Remove blur effect
+    });
+
+    // Add event listeners to events
+    document.getElementById("introductionEvent").addEventListener("click", () => {
+        openPopup(
+            "Definition Of Free Space Management",
+            "Definition: Free space management is the process of tracking and managing unused storage space on a disk or memory to ensure efficient allocation and utilization."
+             ," ","Common Techniques For Free Space Management",
+        "1.Bit Vector, 2.Linked list, 3.Grouping, 4.Counting, 5.Space Maps"
+        );
+    });
+
+    document.getElementById("mainSessionEvent").addEventListener("click", () => {
+        openPopup(
+            "Bit Vector",
+            "Definition: A bit vector (or bitmap) is a data structure used in free space management of file systems to represent the status of storage blocks on a disk. It is a sequence of bits where each bit corresponds to a specific block in the storage device."
+             ," ", "Working Principle", "0: Indicates that the corresponding block is free and 1:Indicates that the corresponding block is allocated."
+        );
+    });
+
+    document.getElementById("qaEvent").addEventListener("click", () => {
+        openPopup(
+            "Linked List",
+            "Definition: A linked list in free space management is a data structure used to keep track of free blocks (or spaces) on a disk. Each free block is linked to the next free block through a pointer, forming a chain of free blocks..",
+            " ","Structure:","1. Data field: Not used, as it is a free block.  and  2. Pointer field: Points to the next free block in the list."
+        );
+    });
+    document.getElementById("lili").addEventListener("click", () => {
+        openPopup(
+            "Grouping",
+            "Definition: Grouping in free space management is a technique used to efficiently track free blocks on a disk. It is an enhancement to the basic linked list method. Instead of storing individual free blocks in the list, groups of free blocks are maintained together, which reduces overhead and speeds up the process of finding free blocks.",
+            " ","How Grouping Works:","The free space is represented by pairs of values:  1.Starting block address: The first block in the contiguous free space.  2. Count: The number of consecutive free blocks starting from the given block."
+        );
+    });
+    
+    document.getElementById("vee").addEventListener("click", () => {
+        openPopup(
+            "Counting",
+            "Definition: Counting in free space management is a technique used to track consecutive free blocks on a disk by storing the starting block address and the number of consecutive free blocks. Instead of managing each free block individually, the system stores a count of how many free blocks are grouped together, which reduces overhead and improves efficiency.",
+            " ","How Counting Works:","Instead of keeping pointers to individual free blocks, a group of consecutive free blocks is stored together A group consists of a block that holds the addresses (pointers) to several free blocks. This way, a small set of pointers can represent a larger number of contiguous free blocks."
+        );
+    });
+    
+    
+    document.getElementById("vee1").addEventListener("click", () => {
+        openPopup(
+            "Space Maps",
+            "Definition: A space map is a data structure used in free space management to track the allocation status of large regions of storage (such as disk blocks) in an efficient way. It is particularly useful in systems where large volumes of storage are managed, such as file systems for large-scale storage devices (e.g., ZFS). Space maps help minimize overhead, improve performance, and reduce fragmentation by managing large chunks of free or allocated space rather than tracking each individual block.",
+            " ","How Space Maps Work:","A space map divides the disk into regions or chunks, each representing a set of contiguous blocks. Each chunk can be marked as either free or allocated, reducing the need to track every individual block. The space map stores the status of these regions in a compact form, making it easier to quickly find and allocate free space."
+        );
+    });
+    
+function showVideo() {
+            const video = document.getElementById('video-container');
+            video.classList.toggle('show-video');  // Toggle video visibility
+        }
+    
+    
+</script>
+</body>
+</html>
+
